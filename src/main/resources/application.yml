@@ -1,0 +1,34 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: marquez-t1.ms-cita
+  datasource:
+    url: jdbc:mysql://localhost:3307/bd_marquez_citas
+    username: root
+    password: Acceso_2012
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+       key-serializer: org.apache.kafka.common.serialization.StringSerializer
+       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+       properties:
+         spring.json.add.type.headers : false
+    template:
+      default-topic: topic-marquez
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka
+    register-with-eureka: true
+    fetch-registry: true
+
